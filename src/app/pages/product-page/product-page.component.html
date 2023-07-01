@@ -1,0 +1,78 @@
+<div class="banner">
+  <h1>Tất cả sản phẩm</h1>
+</div>
+<div class="container">
+
+  <h1>Danh sách sản phẩm</h1>
+  <div class="row">
+    <div class="col-md-3">
+      <div>
+        <label for="">Sắp xếp theo giá</label>
+        <select class="form-select" [(ngModel)]="selectedSortOrder" (ngModelChange)="onSortOrderChange()">
+          <option value="asc">Tăng dần</option>
+          <option value="desc">Giảm dần</option>
+        </select>
+      </div>
+
+
+      <div class="Price">
+        <h4>Mức giá</h4>
+
+        <ul class="list-group">
+          <li class="list-group-item">
+            <input class="checkbox-input me-1" type="radio" name="price" value="" aria-label="..."
+              (click)="ByPrice(10000,20000)" />
+            10.000đ - 20.000đ
+          </li>
+          <li class="list-group-item">
+            <input class="checkbox-input me-1" type="radio" name="price" value="" aria-label="..."
+              (click)="ByPrice(20000,30000)" />
+            20.000đ - 30.000đ
+          </li>
+          <li class="list-group-item">
+
+            <input class="checkbox-input me-1" type="radio" name="price" value="" aria-label="..."
+              (click)="ByPrice(30000,50000)" />
+            30.000đ - 50.000đ
+
+          </li>
+          <li class="list-group-item">
+            <input class="checkbox-input me-1" type="radio" name="price" value="" aria-label="..."
+              (click)="ByPrice(50000,100000)" />
+            50.000đ - 100.000đ
+          </li>
+          <li class="list-group-item">
+            <input class="checkbox-input me-1" type="radio" name="price" value="" aria-label="..."
+              (click)="ByPrice(100000,10000000000)" />
+            Giá trên 100.000đ
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="cate">
+        <button (click)="currentProduct()">ALL</button>
+        <div *ngFor="let category of categories">
+          <button (click)="selectCate(category._id)">{{category.name}}</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let product of filteredProducts">
+          <a routerLink="{{ product._id }}">
+            <img [src]="product.image" [alt]="product.name" class="img-favorite" />
+            <h2>{{ product.name }}</h2>
+            <h5 style="color: var(--2light-color);font-weight: 700;">{{ product.price }} vnd</h5>
+          </a>
+        </div>
+      </div>
+      <div class="paginate">
+        <mat-paginator [length]="formattedPagination.length" [pageSize]="formattedPagination.pageSize"
+          [pageSizeOptions]="formattedPagination.pageSizeOptions" [pageIndex]="formattedPagination.pageIndex"
+          (page)="onPageChange($event)">
+        </mat-paginator>
+
+      </div>
+    </div>
+
+  </div>
+</div>
